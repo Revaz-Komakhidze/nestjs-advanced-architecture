@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { ApplicationBootstrapOptions } from './common/interfaces/application-bootstrap-options.interface';
 import { CoreModule } from './core/core.module';
 import { AlarmsInfrastructureModule } from './alarms/infrastructure/alarms-infrastructure.module';
+import { CqrsModule } from '@nestjs/cqrs';
 
 @Module({
   imports: [CoreModule],
@@ -16,6 +17,7 @@ export class AppModule {
     return {
       module: AppModule,
       imports: [
+        CqrsModule.forRoot(),
         CoreModule.forRoot(options),
         AlarmsModule.withInfrastucture(
           AlarmsInfrastructureModule.use(options.driver),
